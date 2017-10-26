@@ -1,0 +1,2 @@
+# bitsim
+Bitcoin Dice Simulator
