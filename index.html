@@ -1,0 +1,154 @@
+<html>
+ <head>
+ 	<meta charset="utf-8">
+  	<title>Bitsim - Bitcoin Dice Simulator</title>
+  	<link rel="stylesheet" href="css/indexStyles.css">
+ </head>
+ <body onload="Start()">
+ 	<div class="container">
+ 		<div id="menu" style="opacity: 0;cursor:pointer">
+			<div id="dice" onclick="SwitchGame(1)">
+				<p>dice</p>
+			</div>
+			<div id="auto" onclick="SwitchGame(2)">
+				<p>auto</p>
+			</div>
+			<div id="analyse" onclick="SwitchGame(3)">
+				<p>analyse</p>
+			</div>
+		</div>
+ 		<img id="logo" src="assets/logo.png" alt="logo">
+ 		<p id="arrow" onclick="Menu()">&#8250;</p>
+ 		<br>
+ 		<br>
+ 		<div id="betOptions">
+ 			<h2 id="betOptionsLbl" style="text-align: center; margin-top:0.5%; padding:1%"> BET OPTIONS </h2>
+	 		<div id="divCapital">
+	 			<p id="capitalLbl"><strong>CAPITAL</strong></p>
+	 			<input type="text" id="editable-capital" placeholder="&#3647 0.00000000" value="0.00000000" onblur="InputBlur('capital')">
+	 		</div>
+	 		<div id="divBet">
+	 			<p id="betAmountLbl"><strong>BET</strong></p>
+	 			<input type="text" id="editable-bmt" placeholder="0.00000000" value="0.00000000" onblur="InputBlur('bet')" onchange="bet = document.getElementById('editable-bmt').value">
+	 			<button id="betx2" onclick="ChangeBet(1)">x2</button>
+	 			<button id="betHalf" onclick="ChangeBet(2)">/2</button>
+	 			<button id="betMax" onclick="ChangeBet(3)">Max</button>
+	 		</div>
+	 		<div id="divProfit">
+	 			<p id="profitLbl"><strong>PROFIT</strong></p>
+	 			<label id="profitOption">0.00000000</label>
+	 		</div>
+	 		<div id="divRoll">
+	 			<p id="rollLbl"><strong>ROLL OVER</strong></p>
+	 			<button id="roll" onclick="RollChange()">N/A</button>
+	 		</div>
+	 		<div id="divPayout">
+	 			<p id="payoutLbl"><strong>PAYOUT</strong></p>
+	 			<input id="payout" placeholder="2.0000x" value="N/A" onblur="InputBlur('payout')" onfocus="document.getElementById('payout').value = ''">
+	 		</div>
+	 		<div id="divChance">
+	 			<p id="chanceLbl"><strong>CHANCE</strong></p>
+	 			<input id="chance" placeholder="49.5%" value="N/A" onblur="InputBlur('chance')" onfocus="document.getElementById('chance').value = ''">
+	 		</div>
+	 		<div id="divBetSpeed">
+	 			<p id="betSpeedLbl"><strong>SPEED BET - <span id="bps">1</span> bets/s</strong></p>
+	 			<input id="betSpeed" type="range" min="1" max="1000" value="1" onchange="ChangeSpeed()">
+	 		</div>
+	 		<div id="divchangeEvents">
+		 		<div id="divWinEvent">
+		 			<p id="winEventLbl"><strong>WINNING EVENTS</strong></p>
+		 			<div id="divWinEventChoices">
+			 			<div id="divWinReturn">
+			 				<label><input type="radio" id="return-on-win" checked="checked" class="winning-events" name="winning-events"> Return to base amount</label>
+			 			</div>
+			 			<div id="divWinIncrease">
+			 				<label><input type="radio" id="bet-on-win" class="winning-events" name="winning-events"> Increase/decrease <input type="text" id="winIncrease" placeholder="0"> % </label>
+			 			</div>
+			 		</div>
+		 		</div>
+		 		<div id="divLossEvent">
+		 			<p id="lossEventLbl"><strong>LOSING EVENTS</strong></p>
+		 			<div id="divLossEventChoices">
+			 			<div id="divLossReturn">
+			 				<label><input type="radio" id="return-on-loss" checked="checked" class="losing-events" name="losing-events"> Return to base amount</label>
+			 			</div>
+			 			<div id="divLossIncrease">
+			 				<label><input type="radio" id="bet-on-loss" class="losing-events" name="losing-events"> Increase/decrease <input type="text" id="lossIncrease" placeholder="0"> % </label>
+			 			</div>
+			 		</div>
+		 		</div> 
+		 	</div>
+	 	</div>
+	 	<!-- AUTO BET GAME AREA -->
+	 	<div id="autoBetArea" style="opacity: 1; pointer-events: auto;">
+	 		<h2 id="autoBetLbl" style="text-align: center; margin-top:0.5%; padding:1%">AUTOMATIC BET STATS</h2>	
+	 		<div id="divLast5Rolls">
+	 			<p id="lastRollsLbl">LAST 5 ROLLS</p>
+	 			<div id="roll1">
+	 				N/A
+	 			</div>
+	 			<div id="roll2">
+	 				N/A
+	 			</div>
+	 			<div id="roll3">
+	 				N/A
+	 			</div>
+	 			<div id="roll4">
+	 				N/A
+	 			</div>
+	 			<div id="roll5">
+	 				N/A
+	 			</div>
+	 		</div>
+	 		<div id="divLucky">
+	 			<p id="luckyLbl">LUCKY</p>
+	 			<p id="luckyAmount"><span id="lucky">143.74</span>%</p>
+	 		</div>
+	 		<div id="divWagered">
+	 			<p id="wageredLbl">WAGERED</p>
+	 			<p id="wageredAmount"><span id="wagered">0.00001234</span> BTC</p>
+	 		</div>
+	 		<div id="divBetsWon">
+	 			<p id="betsWonLbl">WON</p>
+	 			<p id="betsWon" class="auto3rdRow">N/A</p>
+	 		</div>
+	 		<div id="divWinStreak">
+	 			<p id="WinStreakLbl">WIN STREAK</p>
+	 			<p id="winStreak" class="auto3rdRow">N/A</p>
+	 		</div>
+	 		<div id="divBetsLost">
+	 			<p id="betsLostLbl">LOST</p>
+	 			<p id="betsLost" class="auto3rdRow">N/A</p>
+	 		</div>
+	 		<div id="divLossStreak">
+	 			<p id="lossStreakLbl">LOSS STREAK</p>
+	 			<p id="lossStreak" class="auto3rdRow">N/A</p>
+	 		</div>
+	 		<div id="divNewCapital">
+	 			<p id="newCapitalLbl">CAPITAL</p>
+	 			<p id="newCapitalAmount">&#3647 <span id="capital">0.00000000</span></p>
+	 		</div>
+	 		<div id="divCurrentBet">
+	 			<p id="currentBetLbl">CURRENT BET</p>
+	 			<p id="currentBetAmount">&#3647 <span id="currentBet">0.00000000</span></p>
+	 		</div>
+	 		<div id="divProfitMade">
+	 			<p id="profitMadeLbl">PROFIT</p>
+	 			<p id="profitMade">&#3647 <span id="profit">0.00000000</span></p>
+	 		</div>
+	 	</div>
+	 	<!-- DICE GAME AREA -->
+	 	<div id="diceGameArea" style="opacity: 0; pointer-events: 0;">
+	 		<h2 id="diceLbl" style="text-align: center;">DICE</h2>
+	 	</div>
+	 	<!-- ANALYSE BET AREA -->
+	 	<div id="analyseArea" style="opacity: 0; pointer-events: 0;">
+	 		<h2 id="analyseLbl" style="text-align: center;">ANALYSE BET</h2>
+	 	</div>
+	 	<button id="rollBtn" onclick="InitRoll()" style="color: white; width: 95%; margin:2.5%; height: 15%; background-color: rgb(41,45,53); border:none; text-align: center; font-size: 5vh;">ROLL</button>
+ 	</div>
+ </body>
+
+<script src="scripts/jsIndex.js"></script>
+
+</html> 

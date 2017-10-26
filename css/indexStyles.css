@@ -1,0 +1,405 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*fonts */
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/*     */
+
+
+body{
+	background-color: rgb(24,26,30);
+}
+
+.container{
+	padding:0.6%;
+}
+
+#logo{  
+	width:21%;
+}
+
+#arrow{
+	position:fixed;
+	font-size:50px;
+	color:white;
+	top:-2.3%;
+	left:22.6%;
+	cursor: pointer;
+}
+
+
+#menu{
+	font-family: 'Open Sans', sans-serif;
+	font-size: 2.7vh;
+	color: white;
+	overflow:hidden;
+	position:fixed;
+	top:2.1%;
+	left:6%;
+	opacity:0;
+	pointer-events: none;
+	transition: 1s;
+}
+
+#dice{
+	float:left;
+	width:5vw;
+	text-align: center;
+}
+
+#auto{
+	float:left;
+	width:5vw;
+	text-align: center;
+}
+#analyse{
+	float: left;
+	width:7.1vw;
+	text-align: center
+}
+
+#betOptions{
+	font-family: Open Sans;
+	color:rgb(176,179,193);
+	width:48%;
+	height:60%;
+	background-color: rgb(41,45,53);
+	float: left;
+}
+
+/*#betOptionsLbl{
+	font-size:3.5vh;
+	font-weight: 100;
+	margin-top:-0.5%;
+} */
+
+#divCapital{
+	margin:2.2%;
+	margin-top:-2.2%;
+	float: left;
+	width: 28.7%;
+	height:17.5%;
+	background-color: rgb(16,18,21);
+}
+
+#capitalLbl{
+	text-align: center;
+	font-size: 2.05vh;
+	margin-top: 3%;
+	font-weight: 100;
+}
+
+#editable-capital{
+	color:rgb(176,179,193);
+	width:65%;
+	height:45%;
+	margin-top: -4%;
+	margin-left:17.5%;
+	font-family: 'Nexa-Bold', fallback, sans-serif;
+	font-size: 1.1vw;
+	text-align: center;
+	border:none;
+	background-color:rgb(41,45,53);
+	border-color: rgb(41,45,53);
+	-moz-border-radius:4px; 
+    -webkit-border-radius: 4px; 
+    border-radius: 4px;
+}
+
+#divBet, #divProfit{
+	float:left;
+	margin:2.2%;
+	margin-top:-2.2%;
+	width: 62%;
+	height:8.1%;
+	background-color: rgb(16,18,21);
+}
+
+#betAmountLbl, #profitLbl{
+	text-align: left;
+	font-size: 2.05vh;
+	margin-top: 1.6%;
+	margin-left:2.5%;
+	font-weight:100;
+}
+
+#editable-bmt{
+	color:rgb(176,179,193);
+	width:60%;
+	height:70%;
+	margin-top: -9%;
+	margin-left:16%;
+	font-family: 'Nexa Bold', fallback, sans-serif;
+	font-size:1.1vw;
+	text-align: center;
+	background-color:rgb(41,45,53);
+	border:none;
+	float:left;
+}
+
+#betx2, #betHalf, #betMax{
+	float:right;
+	margin-top: -9%;
+	height: 70%;
+	width:6.5%;
+	font-size: 0.8vw;
+	text-align: center;
+	background-color:rgb(41,45,53);
+	border:none;
+	padding:0;
+	color:rgb(176,179,193);
+}
+
+#betx2{
+	margin-right:16.5%;
+}
+
+#bethalf{
+	margin-right:9%;
+}
+
+#betMax{
+	margin-right: 1.5%;
+}
+
+#divProfit{
+	margin-top: -1.3%;
+} 
+
+#profitOption{
+	float:left;
+	margin-top:-9%;
+	margin-left:16%;
+	width:82.6%;
+	height:70%;
+	text-align: center;
+	font-size: 1.1vw;
+	background-color: rgb(33,36,42);
+}
+
+#divRoll, #divPayout, #divChance{
+	margin:2.2%;
+	margin-top:0;
+	float: left;
+	width: 28.78%;
+	height:17.5%;
+	background-color: rgb(16,18,21);
+}
+
+#rollLbl, #payoutLbl, #chanceLbl, #winEventLbl, #lossEventLbl, #betSpeedLbl{
+	text-align: center;
+	font-size: 2.05vh;
+	margin-top: 3%;
+	font-weight: 100;
+}
+
+#roll, #payout, #chance{
+	color:rgb(176,179,193);
+	width:65%;
+	height:45%;
+	margin-top: -4%;
+	margin-left:17.5%;
+	font-family: 'Nexa-Bold', fallback, sans-serif;
+	font-size: 1.1vw;
+	text-align: center;
+	border:none;
+	background-color:rgb(41,45,53);
+	border-color: rgb(41,45,53);
+	-moz-border-radius:4px; 
+    -webkit-border-radius: 4px; 
+    border-radius: 4px;
+}
+
+#roll{
+	cursor:pointer;
+}
+
+#payout{
+	background-color: rgb(33,36,42);
+}
+
+#input[form="percent"]{
+	content: "%";
+}
+
+#divBetSpeed{
+	background-color: rgb(33,36,42);
+	float:left;
+	width:95.1%;
+	height:14.5%;
+	margin-left: 2.2%;
+}
+
+#betSpeedLbl{
+	margin-top:0.5%;
+}
+
+#betSpeed{
+	width:97.8%;
+}
+
+
+#divChangeEvents{
+	width:100%;
+	height:28.5%;
+	margin-top: 38.5%
+}
+
+#divWinEvent{
+	width:46%;
+	height: 100%;
+	margin-left: 2.3%;
+	margin-top: -1%;
+	float:left;
+	background-color: rgb(33,36,42);
+}
+
+#winEventLbl{
+	color:rgb(68,122,55);
+	font-size: 2vh;
+	text-align: left;
+	margin-left: 4.5%;
+}
+
+#winIncrease, #lossIncrease{
+	width:10%;
+	text-align: center;
+	background-color: rgb(41,45,53);
+	border:none;
+	color:rgb(176,179,193);
+	font-weight: 500;
+}
+
+#lossEventLbl{
+	color:rgb(190,43,21);
+	font-size: 2vh;
+	text-align: left;
+	margin-left: 4.5%;
+}
+
+#divLossEvent{
+	width:46%;
+	height:100%;
+	margin-right: 2.6%;
+	margin-top:-1%;
+	float:right;
+	background-color:rgb(33,36,42)	;
+}
+
+#divWinEventChoices, #divLossEventChoices{
+	margin: 0;
+	margin-left:3%;
+	font-size: 1.8vh;
+}
+
+#divWinReturn, #divLossReturn{
+	height: 25%;
+}
+
+#autoBetArea, #analyseArea, #diceGameArea{
+	font-family: Open Sans;
+	position: fixed;
+	color:rgb(176,179,193);
+	width:48%;
+	height:59%;
+	margin-left:50%;
+	background-color: rgb(41,45,53);
+	float:right;
+	transition: 1s;
+}
+
+#divLast5Rolls{
+	width:95%;
+	height:17.5%;
+	background-color:rgb(16,18,21);
+	margin-left: 2.5%;
+	margin-top:-2.2%;
+}
+
+#lastRollsLbl{
+	margin-left:1%;
+	color:rgb(176,179,193);
+	font-size: 2.05vh;
+	font-weight: 100;
+}
+
+#roll1, #roll2, #roll3, #roll4, #roll5{
+	float:left;
+	width:14%;
+	height:50%;
+	margin-top: -1.5%;
+	margin-left:4.6%;
+	border: 2px dotted;
+	border-color: blue;
+	border-radius: 10px;
+	text-align: center;
+	font-size: 3.5vh;
+}
+
+#divLucky, #divWagered, #divProfitMade, #divNewCapital{
+	float:left;
+	width:45%;
+	height:15%;
+	background-color:rgb(33,36,42);
+	margin:2.5%;
+}
+
+#luckyLbl, #wageredLbl{
+	font-size: 2.05vh;
+	text-align: center;
+	font-weight: 100;
+	margin:0;
+}
+
+#luckyAmount, #wageredAmount{
+	text-align: center;
+	font-size: 3vh;
+	margin:1%;
+}
+
+#divBetsWon, #divWinStreak, #divBetsLost, #divLossStreak{
+	float:left;
+	width:21.875%;
+	height:20%;
+	margin-left:2.5%;
+	background-color: rgb(24,26,30);
+}
+
+#betsWonLbl, #winStreakLbl, #betsLostLbl, #lossStreakLbl{
+	text-align: center;
+	font-size: 1.8vh;
+	margin:1%;
+	color:rgb(68,122,55);
+}
+
+#betsLostLbl, #lossStreakLbl{
+	color:rgb(190,43,21);
+}
+
+.auto3rdRow{
+	text-align: center;
+	font-size: 3vh;
+	margin-top: 6%;
+}
+
+#divProfitMade, #divNewCapital, #divCurrentBet{
+	float:left;
+	width:28.3%;
+	height:22.6%;
+	background-color:rgb(33,36,42);
+	margin:2.5%;
+}
+#profitMadeLbl, #newCapitalLbl, #currentBetLbl{
+	font-size: 2.05vh;
+	text-align: center;
+	margin-top:3%;
+}
+
+#profitMade, #newCapitalAmount, #currentBetAmount{
+	font-size: 3.5vh;
+	text-align: center;
+	margin:-2%;
+}
