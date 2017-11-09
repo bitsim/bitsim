@@ -312,7 +312,7 @@ body{
 	transition: 1s;
 }
 
-#divLast5Rolls{
+#divLast5Rolls, #divFirst5Rolls{
 	width:95%;
 	height:17.5%;
 	background-color:rgb(16,18,21);
@@ -320,14 +320,14 @@ body{
 	margin-top:-2.2%;
 }
 
-#lastRollsLbl{
+#lastRollsLbl, #firstRollsLbl{
 	margin-left:1%;
 	color:rgb(176,179,193);
 	font-size: 2.05vh;
 	font-weight: 100;
 }
 
-#roll1, #roll2, #roll3, #roll4, #roll5{
+#roll1, #roll2, #roll3, #roll4, #roll5, #Aroll1, #Aroll2, #Aroll3, #Aroll4, #Aroll5{
 	float:left;
 	width:14%;
 	height:50%;
@@ -340,7 +340,7 @@ body{
 	font-size: 3.5vh;
 }
 
-#divLucky, #divWagered, #divProfitMade, #divNewCapital{
+#divLucky, #divWagered, #divProfitMade, #divNewCapital, #divConsecutiveLosses, #divProbability{
 	float:left;
 	width:45%;
 	height:15%;
@@ -348,20 +348,20 @@ body{
 	margin:2.5%;
 }
 
-#luckyLbl, #wageredLbl{
+#luckyLbl, #wageredLbl, #ConsecutiveLossesLbl, #probabilityLbl{
 	font-size: 2.05vh;
 	text-align: center;
 	font-weight: 100;
 	margin:0;
 }
 
-#luckyAmount, #wageredAmount{
+#luckyAmount, #wageredAmount, #ConsecutiveLossesAmount, #probabilityAmount{
 	text-align: center;
 	font-size: 3vh;
 	margin:1%;
 }
 
-#divBetsWon, #divWinStreak, #divBetsLost, #divLossStreak{
+#divBetsWon, #divWinStreak, #divBetsLost, #divLossStreak, #div25Profit, #div50Profit, #div75Profit, #div100Profit, #divBreak25, #divBreak50, #divBreak75, #divBreak100{
 	float:left;
 	width:21.875%;
 	height:20%;
@@ -369,11 +369,15 @@ body{
 	background-color: rgb(24,26,30);
 }
 
-#betsWonLbl, #winStreakLbl, #betsLostLbl, #lossStreakLbl{
+#betsWonLbl, #winStreakLbl, #betsLostLbl, #lossStreakLbl, #Profit25Lbl, #Profit50Lbl, #Profit75Lbl, #Profit100Lbl, #Break25Lbl, #Break50Lbl, #Break75Lbl, #Break100Lbl{
 	text-align: center;
 	font-size: 1.8vh;
 	margin:1%;
 	color:rgb(68,122,55);
+}
+
+#Profit25Lbl, #Profit50Lbl, #Profit75Lbl, #Profit100Lbl, #Break25Lbl, #Break50Lbl, #Break75Lbl, #Break100Lbl{
+	color: white;
 }
 
 #betsLostLbl, #lossStreakLbl{
@@ -385,6 +389,7 @@ body{
 	font-size: 3vh;
 	margin-top: 6%;
 }
+
 
 #divProfitMade, #divNewCapital, #divCurrentBet{
 	float:left;

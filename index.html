@@ -144,9 +144,66 @@
 	 	<!-- ANALYSE BET AREA -->
 	 	<div id="analyseArea" style="opacity: 0; pointer-events: 0;">
 	 		<h2 id="analyseLbl" style="text-align: center;">ANALYSE BET</h2>
-	 	</div>
-	 	<button id="rollBtn" onclick="InitRoll()" style="color: white; width: 95%; margin:2.5%; height: 15%; background-color: rgb(41,45,53); border:none; text-align: center; font-size: 5vh;">ROLL</button>
- 	</div>
+	 		<div id="divFirst5Rolls">
+	 			<p id="firstRollsLbl">FIRST 5 ROLLS</p>
+	 			<div id="Aroll1">
+	 				N/A
+	 			</div>
+	 			<div id="Aroll2">  
+	 				N/A
+	 			</div>
+	 			<div id="Aroll3"> 
+	 				N/A
+	 			</div>
+	 			<div id="Aroll4">
+	 				N/A
+	 			</div>
+	 			<div id="Aroll5"> 
+	 				N/A
+	 			</div>
+	 		</div>
+	 		<div id="divConsecutiveLosses">
+	 			<p id="ConsecutiveLossesLbl">SURVIVABLE CONSECUTIVE LOSSES</p>
+	 			<p id="ConsecutiveLossesAmount">0</p>
+	 		</div>
+	 		<div id="divProbability">
+	 			<p id="probabilityLbl">PROBABILITY OF LOSS</p>
+	 			<p id="probabilityAmount"><span id="probability">0</span>%</p>
+	 		</div>
+	 		<div id="divBreak25">
+	 			<p id="Break25Lbl">25%</p>     
+	 			<p id="Break25" class="auto3rdRow">N/A</p>
+	 		</div>
+	 		<div id="divBreak50">
+	 			<p id="Break50Lbl">50%</p>
+	 			<p id="Break50" class="auto3rdRow">N/A</p>
+	 		</div>
+	 		<div id="divBreak75">
+	 			<p id="Break75Lbl">75%</p>
+	 			<p id="Break75" class="auto3rdRow">N/A</p>
+	 		</div>
+	 		<div id="divBreak100">
+	 			<p id="Break100Lbl">100%</p>
+	 			<p id="Break100" class="auto3rdRow">N/A</p>
+			 </div>
+     		 <div id="div25Profit">
+	 			<p id="Profit25Lbl">AVG. PROFIT (25%)</p>
+	 			<p id="Profit25" class="auto3rdRow">N/A</p>
+	 		</div>
+	 		<div id="div50Profit">
+	 			<p id="Profit50Lbl">AVG. PROFIT (50%)</p>
+	 			<p id="Profit50" class="auto3rdRow">N/A</p>
+	 		</div>
+	 		<div id="div75Profit">
+	 			<p id="Profit75Lbl">AVG. PROFIT (75%)</p>
+	 			<p id="Profit75" class="auto3rdRow">N/A</p>
+	 		</div>
+	 		<div id="div100Profit">
+	 			<p id="Profit100Lbl">AVG. PROFIT (100%)</p>
+	 			<p id="Profit100" class="auto3rdRow">N/A</p>
+	 		</div>
+	 </div>
+	<button id="rollBtn" onclick="InitRoll()" style="color: white; width: 95%; margin:2.5%; height: 15%; background-color: rgb(41,45,53); border:none; text-align: center; font-size: 5vh;">ROLL</button>
  </body>
 
 <script src="scripts/jsIndex.js"></script>

@@ -21,7 +21,8 @@ speed = 1,
 winChange = false,
 winIncrease = 0,
 lossChange = false,
-lossIncrease = 0;
+lossIncrease = 0,
+Mode = "AutoRoll";
 
 //variables for auto roll display
 var 
@@ -80,14 +81,28 @@ function SwitchGame(n){
 		case 1:
 			dice.style.opacity=1;
 			dice.style.pointerEvents = "auto";
+			if(rolling){
+				rolling = false;
+				InitRoll();
+			}
+			document.getElementById("rollBtn").innerHTML = "ROLL"
+			Mode = "Dice";
 			break;
 		case 2:
 			auto.style.pointerEvents = "auto";
 			auto.style.opacity = 1;
+			document.getElementById("rollBtn").innerHTML = "ROLL"
+			Mode = "AutoRoll";
 			break;
 		case 3:
 			analyse.style.opacity=1;
 			analyse.style.pointerEvents = "auto";
+			if(rolling){
+				InitRoll();
+				rolling = false;
+			}
+			document.getElementById("rollBtn").innerHTML = "ANALYSE";
+			Mode = "Analyse";
 			break;
 	}
 }
@@ -189,38 +204,166 @@ function ChangeSpeed(){
 }
 
 function InitRoll(){
-	if(rolling == true){
-		clearInterval(rollInterval);
-		rolling = false;
-		capitalOption = capital;
-		UpdateStats();
-		ClearStats();
-		document.getElementById("rollBtn").innerHTML = "ROLL";
-		document.getElementById("betOptions").style.pointerEvents = "auto"
-	}else{
-		document.getElementById("betOptions").style.pointerEvents = "none"
-		document.getElementById("divBetSpeed").style.pointerEvents = "auto";
-		rolling = true;
-		firstRoll = true;
-		currentBet = bet;
-		capital = capitalOption;
-		document.getElementById("capital").innerHTML = capital.toFixed(8);
-		if(document.getElementById("return-on-win").checked){
-			winChange = false;
-		}else{
-			winChange = true;
-			winIncrease = document.getElementById("winIncrease").value;
-		}
-		if(document.getElementById("return-on-loss").checked){
-			lossChange = false;
-		}else{
-			lossChange = true;
-			lossIncrease = document.getElementById("lossIncrease").value;
-		}
+	switch(Mode){
+		case "AutoRoll":
+			if(rolling == true){
+				clearInterval(rollInterval);
+				rolling = false;
+				capitalOption = capital;
+				UpdateStats();
+				ClearStats();
+				document.getElementById("rollBtn").innerHTML = "ROLL";
+				document.getElementById("betOptions").style.pointerEvents = "auto"
+			}else{
+				document.getElementById("betOptions").style.pointerEvents = "none"
+				document.getElementById("divBetSpeed").style.pointerEvents = "auto";
+				rolling = true;
+				firstRoll = true;
+				currentBet = bet;
+				capital = capitalOption;
+				document.getElementById("capital").innerHTML = capital.toFixed(8);
+				if(document.getElementById("return-on-win").checked){
+					winChange = false;
+				}else{
+					winChange = true;
+					winIncrease = document.getElementById("winIncrease").value;
+				}
+				if(document.getElementById("return-on-loss").checked){
+					lossChange = false;
+				}else{
+					lossChange = true;
+					lossIncrease = document.getElementById("lossIncrease").value;
+				}
 
-		rollInterval = setInterval(function(){ Roll() }, 1000/speed)
+				rollInterval = setInterval(function(){ Roll() }, 1000/speed)
 
-		document.getElementById("rollBtn").innerHTML = "STOP AUTO ROLL";
+				document.getElementById("rollBtn").innerHTML = "STOP AUTO ROLL";
+			}
+			break;
+
+		case "Analyse":
+			if(capitalOption==0 || bet==0){
+				alert("Invalid Capital/bet options")
+			}else{
+				if (document.getElementById("return-on-loss").checked) {
+					lossChange = false;
+				} else {
+					lossChange = true;
+					lossIncrease = document.getElementById("lossIncrease").value;
+				}
+				var x;
+				var i;
+				var Aloss = 0;
+				var ProbabilityOfLoss = (100 - chance) / 100;
+				var probability;
+				capital = capitalOption;
+
+				//Find how many losses it can last
+				for (i = 0; Aloss <= capital; i++) {
+					x = Math.round((bet * (1 + (lossIncrease / 100)) ** i) * 10 ** 8)
+					x = x / 10 ** 8
+					Aloss += x
+				}
+				i = i - 2
+				Aloss = Aloss - x
+				probability = ((ProbabilityOfLoss ** i) * 100).toFixed(6);
+
+				document.getElementById('ConsecutiveLossesAmount').innerHTML = i;
+				document.getElementById('probability').innerHTML = probability;
+
+				i = i + 1;
+				var twentyfive = Math.round(i / 4);
+				var fifty = Math.round(i / 2);
+				var seventyfive = Math.round((i / 4) * 3);
+
+				document.getElementById('Break25Lbl').innerHTML = "Breakeven - Bet " + twentyfive;
+				document.getElementById('Break50Lbl').innerHTML = "Breakeven - Bet " + fifty;
+				document.getElementById('Break75Lbl').innerHTML = "Breakeven - Bet " + seventyfive;
+				document.getElementById('Break100Lbl').innerHTML = "Breakeven - Bet " + i;
+
+				var e;
+				var b;
+				var Aloss2 = 0;
+				var ProfitAverage = 0;
+				for (e = 0; Aloss2 <= capital; e++) {
+					b = Math.round((bet * (1 + (lossIncrease / 100)) ** e) * 10 ** 8);
+					b = b / 10 ** 8
+					Aloss2 += b;
+					ProfitAverage += (((b * payout - Aloss2) / (e + 1)) * 10 ** 8);
+					switch (e) {
+						case 0:
+							document.getElementById('Aroll1').innerHTML = Math.round(b * 10 ** 8);
+							break;
+
+						case 1:
+							document.getElementById('Aroll2').innerHTML = Math.round(b * 10 ** 8);
+							break;
+
+						case 2:
+							document.getElementById('Aroll3').innerHTML = Math.round(b * 10 ** 8);
+							break;
+
+						case 3:
+							document.getElementById('Aroll4').innerHTML = Math.round(b * 10 ** 8);
+							break;
+
+						case 4:
+							document.getElementById('Aroll5').innerHTML = Math.round(b * 10 ** 8);
+							break;
+
+						case twentyfive:
+							var AvgPPR = Math.round(ProfitAverage / twentyfive);
+							document.getElementById('Profit25Lbl').innerHTML = "AVG. PROFIT (1-" + twentyfive + ")"
+							document.getElementById('Profit25').innerHTML = AvgPPR;
+							if (b * payout - Aloss2 > 0) {
+								document.getElementById('Break25').innerHTML = "Yes";
+							} else {
+								document.getElementById('Break25').innerHTML = "No";
+							}
+							ProfitAverage = 0;
+							break;
+
+						case fifty:
+							var AvgPPR = Math.round(ProfitAverage / twentyfive);
+							document.getElementById('Profit50').innerHTML = AvgPPR;
+							var Avg50 = twentyfive + 1;
+							document.getElementById('Profit50Lbl').innerHTML = "AVG. PROFIT (" + Avg50 + "-" + fifty + ")"
+							if (b * payout - Aloss2 > 0) {
+								document.getElementById('Break50').innerHTML = "Yes";
+							} else {
+								document.getElementById('Break50').innerHTML = "No";
+							}
+							ProfitAverage = 0;
+							break;
+
+						case seventyfive:
+							var AvgPPR = Math.round(ProfitAverage / twentyfive);
+							document.getElementById('Profit75').innerHTML = AvgPPR;
+							var Avg75 = fifty + 1;
+							document.getElementById('Profit75Lbl').innerHTML = "AVG. PROFIT (" + Avg75 + "-" + seventyfive + ")"
+							if (b * payout - Aloss2 > 0) {
+								document.getElementById('Break75').innerHTML = "Yes";
+							} else {
+								document.getElementById('Break75').innerHTML = "No";
+							}
+							ProfitAverage = 0;
+							break;
+						case i:
+							var AvgPPR = Math.round(ProfitAverage / twentyfive);
+							document.getElementById('Profit100').innerHTML = AvgPPR;
+							var Avg100 = seventyfive + 1;
+							document.getElementById('Profit100Lbl').innerHTML = "AVG. PROFIT (" + Avg100 + "-" + i + ")"
+							if (b * payout - Aloss2 > 0) {
+								document.getElementById('Break100').innerHTML = "Yes";
+							} else {
+								document.getElementById('Break100').innerHTML = "No";
+							}
+							ProfitAverage = 0;
+							break;
+					}
+				}
+			}
+		break;
 	}
 }
 
@@ -232,6 +375,7 @@ function Roll(){
 		return("stopped");
 	}
 
+	document.getElementById("divBetSpeed").style.pointerEvents = "auto";
 	var rollNum = Math.floor(Math.random() * 10000) / (100);
 	totalRolls++;
 
