@@ -1,2 +1,2 @@
 # bitsim
-Bitcoin Dice Simulator
+Bitcoin casino dice game simulator
