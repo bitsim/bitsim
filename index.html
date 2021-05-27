@@ -6,9 +6,6 @@
   </head>
   <body onload="Start()">
     <div id="menu" style="opacity: 0; cursor: pointer">
-      <div id="dice" onclick="SwitchGame(1)">
-        <p>dice</p>
-      </div>
       <div id="auto" onclick="SwitchGame(2)">
         <p>auto</p>
       </div>
@@ -20,63 +17,69 @@
     <p id="arrow" onclick="Menu()">&#8250;</p>
     <div class="container">
       <div id="betOptions">
-        <h2
-          id="betOptionsLbl"
-          style="text-align: center; margin-top: 0.5%; padding: 1%"
-        >
-          BET OPTIONS
-        </h2>
-        <div id="divCapital">
-          <p id="capitalLbl"><strong>CAPITAL</strong></p>
-          <input
-            type="text"
-            id="editable-capital"
-            placeholder="B 0.00000000"
-            value="0.00000000"
-            onblur="InputBlur('capital')"
-          />
+        <h2 id="betOptionsLbl">BET OPTIONS</h2>
+        <div class="row">
+          <div id="divCapital">
+            <p id="capitalLbl"><strong>CAPITAL</strong></p>
+            <input
+              type="text"
+              id="editable-capital"
+              placeholder="B 0.00000000"
+              value="0.00000000"
+              onblur="InputBlur('capital')"
+            />
+          </div>
+          <div class="betProfitContainer">
+            <div id="divBet">
+              <label for="editable-bmt" id="betAmountLbl"
+                ><strong>BET</strong></label
+              >
+              <input
+                type="text"
+                id="editable-bmt"
+                placeholder="0.00000000"
+                value="0.00000000"
+                onblur="InputBlur('bet')"
+                onchange="bet = document.getElementById('editable-bmt').value"
+              />
+              <button id="betx2" onclick="ChangeBet(1)">x2</button>
+              <button id="betHalf" onclick="ChangeBet(2)">/2</button>
+              <button id="betMax" onclick="ChangeBet(3)">Max</button>
+            </div>
+            <div id="divProfit">
+              <label for="profitOption" id="profitLbl"
+                ><strong>PROFIT</strong></label
+              >
+              <label id="profitOption">0.00000000</label>
+            </div>
+          </div>
         </div>
-        <div id="divBet">
-          <p id="betAmountLbl"><strong>BET</strong></p>
-          <input
-            type="text"
-            id="editable-bmt"
-            placeholder="0.00000000"
-            value="0.00000000"
-            onblur="InputBlur('bet')"
-            onchange="bet = document.getElementById('editable-bmt').value"
-          />
-          <button id="betx2" onclick="ChangeBet(1)">x2</button>
-          <button id="betHalf" onclick="ChangeBet(2)">/2</button>
-          <button id="betMax" onclick="ChangeBet(3)">Max</button>
-        </div>
-        <div id="divProfit">
-          <p id="profitLbl"><strong>PROFIT</strong></p>
-          <label id="profitOption">0.00000000</label>
-        </div>
-        <div id="divRoll">
-          <p id="rollLbl"><strong>ROLL OVER</strong></p>
-          <button id="roll" onclick="RollChange()">N/A</button>
-        </div>
-        <div id="divPayout">
-          <p id="payoutLbl"><strong>PAYOUT</strong></p>
-          <input
-            id="payout"
-            placeholder="2.0000x"
-            value="N/A"
-            onblur="InputBlur('payout')"
-            onfocus="document.getElementById('payout').value = ''"
-          />
-        </div>
-        <div id="divChance">
-          <p id="chanceLbl"><strong>CHANCE</strong></p>
-          <input
-            id="chance"
-            placeholder="49.5%"
-            value="N/A"
-            onblur="InputBlur('chance')"
-            onfocus="document.getElementById('chance').value = ''"
-          />
+
+        <div class="optionsContainer">
+          <div id="divRoll">
+            <p id="rollLbl"><strong>ROLL OVER</strong></p>
+            <button id="roll" onclick="RollChange()">N/A</button>
+          </div>
+          <div id="divPayout">
+            <p id="payoutLbl"><strong>PAYOUT</strong></p>
+            <input
+              id="payout"
+              placeholder="2.0000x"
+              value="N/A"
+              onblur="InputBlur('payout')"
+              onfocus="document.getElementById('payout').value = ''"
+            />
+          </div>
+          <div id="divChance">
+            <p id="chanceLbl"><strong>CHANCE</strong></p>
+            <input
+              id="chance"
+              placeholder="49.5%"
+              value="N/A"
+              onblur="InputBlur('chance')"
+              onfocus="document.getElementById('chance').value = ''"
+            />
+          </div>
         </div>
         <div id="divBetSpeed">
           <p id="betSpeedLbl">
@@ -205,12 +208,8 @@
           <p id="profitMade">B <span id="profit">0.00000000</span></p>
         </div>
       </div>
-      <!-- DICE GAME AREA -->
-      <div id="diceGameArea" style="opacity: 0; pointer-events: 0">
-        <h2 id="diceLbl" style="text-align: center">DICE</h2>
-      </div>
       <!-- ANALYSE BET AREA -->
-      <div id="analyseArea" style="opacity: 0; pointer-events: 0">
+      <div id="analyseArea" style="display: none">
         <h2 id="analyseLbl" style="text-align: center">ANALYSE BET</h2>
         <div id="divFirst5Rolls">
           <p id="firstRollsLbl">FIRST 5 ROLLS</p>
